@@ -12,7 +12,19 @@ to get 2+4+9 = 15. However, if x = 10 for the same list, it is not possible to f
 using namespace std;
 
 vector<int> subsetSum(vector<int> v){
-    pass;
+    vector<int> sums;
+    int n = v.size();
+
+    for(int i=0;i<(1<<n);i++){
+        int s = 0;
+        for(int j=0;j<n;j++){
+            if((i>>j)&1) s+=v[i];
+        }
+
+        sums.push_back(s);
+    }
+
+    return sums;
 } 
 
 int main(){
@@ -27,10 +39,13 @@ int main(){
     vector<int> leftSum = subsetSum(left);
     vector<int> rightSum = subsetSum(right);
 
+    sort(right.begin(),right.end());
     int ans = 0;
     for(int i=0;i<leftSum.size();i++){
         int req = x - leftSum[i];
-        int cnt = upper_bound(rightSum.begin(),rightSum.end(),req) - lower_bound(rightSum.begin(),rightSum.end(),req);
+        auto ub = upper_bound(rightSum.begin(),rightSum.end(),req);
+        auto lb = lower_bound(rightSum.begin(),rightSum.end(),req);
+        int cnt = ub-lb;
         ans = ans + cnt;
     }
 
