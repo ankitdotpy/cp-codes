@@ -59,6 +59,16 @@ bool isPowerOfTwo(int num){
 	return (num&(num-1))==0;
 }
 
+int countSetBits(int num){
+	int cnt = 0;
+	while(num){
+		cnt += (num&1);
+		num = num>>1;
+	}
+
+	return cnt;
+}
+
 signed main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);
@@ -70,7 +80,7 @@ signed main(){
 	cout<<clearLastIBits(43,3)<<endl;
 	cout<<clearRangeOfBits(43,1,4)<<endl;
 	cout<<replaceBits(43,10,1,4)<<endl;
-
+	cout<<countSetBits(43)<<endl;
 	// bitset<16> x(43);
 	// bitset<16> y(53);
 	// cout<<x<<endl;
