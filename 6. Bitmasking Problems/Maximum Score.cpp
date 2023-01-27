@@ -9,7 +9,7 @@ const int INF = 1e18 + 5;
 const double PI = 3.1415926535;
 const double eps = 1e-9;
 
-int mateixScore(vector<vector<int>> grid){
+int matrixScore(vector<vector<int>> grid){
 	int m = grid.size();
 	int n = grid[0].size();
 
@@ -38,9 +38,13 @@ int mateixScore(vector<vector<int>> grid){
 
 	int ans = 0;
 	for(int i=0;i<m;i++){
-		for(int j=0;j<n;j++){
-			ans = ans + (grid[i][j])*(1<<(n-j-1));
+		int num = 0;
+		int mul = 1;
+		for(int j=n-1;j>=0;j--){
+			num = num + (grid[i][j])*mul;
+			mul = mul*2;
 		}
+		ans = ans + num;
 	}
 
 	return ans;
